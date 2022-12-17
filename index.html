@@ -10,7 +10,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 <body>
+    <div id="js-timer">
+        Time: 
+        <div id="timer">
+            00:00
+        </div>
+    </div>
+    <div class="okoomotaca">
     <div class="omotac">
+        
         <ul class="cards">
             
             <li class="card">
@@ -143,7 +151,17 @@
             </li>
         </ul>
     </div>
-
+    <div class="buttons">
+        <button id="start">Start</button>
+        <button id="reset" onclick="refreshCards()">Refresh</button>
+    
+</div>
+</div>
+<div id="moves">Moves:
+    <div id="move-counter">
+        0
+    </div>
+</div>
     <script src="dos.js"></script>
 </body>
 </html>

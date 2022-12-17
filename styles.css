@@ -11,6 +11,54 @@ body{
     justify-content: center;
     min-height: 100vh;
     background-color: #3AAFA9;
+    flex-direction: row;
+}
+.okoomotaca{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#js-timer{
+    font-weight: bold;
+    text-align: center;
+    width: 100px;
+    height: 50px;
+    margin: 50px;
+}
+#timer{
+    
+    font-size: 30px;
+    background-color: #3AAFA9;
+    color:#17252A;
+}
+#moves{
+    font-weight: bold;
+    text-align: center;
+    width: 100px;
+    height: 50px;
+    margin: 50px;
+}
+#move-counter{
+    font-size: 30px;
+    background-color: #3AAFA9;
+    color:#17252A;
+}
+body button{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    margin: 20px;
+    background-color: #17252A;
+    color:#FEFFFF;
+    border-radius: 10px;
+}
+body button:hover{
+    cursor: pointer;
+    color: #DEF2F1;
+    background-color: rgba(0,0,0,0.6);
+    border: none;
 }
 .omotac{
     height: 400px;

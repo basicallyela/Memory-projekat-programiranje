@@ -4,6 +4,10 @@ let matchedCard = 0;
 let cardOne, cardTwo;
 let disableDeck = false;
 
+
+
+
+
 function flipCard(e){
     let clickedCard = e.target;
     if(clickedCard !== cardOne && !disableDeck){
@@ -58,9 +62,20 @@ function shuffleCard(){
     });
 }
 
-shuffleCard();
 
+
+function refreshCards(){
+    shuffleCard();
+}
+
+
+//start game
+
+shuffleCard();
 cards.forEach(card => {
     card.addEventListener("click", flipCard);
 
 });
+
+
+

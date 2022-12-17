@@ -81,7 +81,7 @@ function matchCards(img1, img2){
             setTimeout(()=> {
             return shuffleCard();
                 
-            }, 1000);
+            }, 1500);
             reset();
         }
         cardOne.removeEventListener("click", flipCard);

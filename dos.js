@@ -3,10 +3,57 @@ const cards = document.querySelectorAll(".card");
 let matchedCard = 0;
 let cardOne, cardTwo;
 let disableDeck = false;
+let score = 0;
+
+//timer
+
+"use strict";
+
+let hour = 0;
+let minute = 0;
+let second = 0;
+let millisecond = 0;
+
+let cron;
+
+document.form_main.start.onclick = () => startGame();
+document.form_main.refresh.onclick = () => refresh();
+
+function start() {
+  clearInterval(cron);
+  cron = setInterval(() => { timer(); }, 10);
+}
 
 
+function reset() {
+  clearInterval(cron);
+  minute = 0;
+  second = 0;
+  millisecond = 0;
+  document.getElementById('minute').innerText = '00';
+  document.getElementById('second').innerText = '00';
+  document.getElementById('millisecond').innerText = '000';
+}
+
+function timer() {
+  if ((millisecond += 10) == 1000) {
+    millisecond = 0;
+    second++;
+  }
+  if (second == 60) {
+    second = 0;
+    minute++;
+  }
+  document.getElementById('minute').innerText = returnData(minute);
+  document.getElementById('second').innerText = returnData(second);
+}
+
+function returnData(input) {
+  return input >= 10 ? input : `0${input}`
+}
 
 
+//exit timer
 
 function flipCard(e){
     let clickedCard = e.target;
@@ -22,15 +69,20 @@ function flipCard(e){
        matchCards(cardOneImg, cardTwoImg);
     } 
     
+    
+    
 }
 function matchCards(img1, img2){
     if(img1 === img2){
         matchedCard++;
+        score+=10;
+        document.getElementById('score').innerText = returnData(score);
         if(matchedCard==8){
             setTimeout(()=> {
             return shuffleCard();
                 
             }, 1000);
+            reset();
         }
         cardOne.removeEventListener("click", flipCard);
         cardTwo.removeEventListener("click", flipCard); 
@@ -50,6 +102,8 @@ function matchCards(img1, img2){
     
 }
 function shuffleCard(){
+    score = 0;
+    document.getElementById('score').innerText = returnData(score);
     matchedCard = 0;
     cardOne = cardTwo = "";
     let lista =[1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -64,18 +118,27 @@ function shuffleCard(){
 
 
 
-function refreshCards(){
+
+function refresh(){
+    score = 0;
+    document.getElementById('moves').innerText = returnData(moves);
     shuffleCard();
+    reset();
 }
 
-
-//start game
-
-shuffleCard();
-cards.forEach(card => {
-    card.addEventListener("click", flipCard);
+function startGame(){
+    shuffleCard();
+    disableDeck = false;
+    cards.forEach(card => {
+        card.addEventListener("click", flipCard);
 
 });
+    start();
+}
+
+//start game
+disableDeck = true;
+
 
 
 

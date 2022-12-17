@@ -25,22 +25,23 @@ body{
     width: 100px;
     height: 50px;
     margin: 50px;
-}
-#timer{
-    
     font-size: 30px;
+}
+#js-timer span{
+    font-size: 20px;
     background-color: #3AAFA9;
     color:#17252A;
 }
-#moves{
+.score{
     font-weight: bold;
     text-align: center;
     width: 100px;
     height: 50px;
     margin: 50px;
-}
-#move-counter{
     font-size: 30px;
+}
+.score span{
+    font-size: 20px;
     background-color: #3AAFA9;
     color:#17252A;
 }

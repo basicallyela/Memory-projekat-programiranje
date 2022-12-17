@@ -15,9 +15,7 @@
 <body>
     <div id="js-timer">
         Time: 
-        <div id="timer">
-            00:00
-        </div>
+        <span id="minute">00</span><span>:</span><span id="second">00</span>
     </div>
     <div class="okoomotaca">
     <div class="omotac">
@@ -154,16 +152,15 @@
             </li>
         </ul>
     </div>
-    <div class="buttons">
-        <button id="start">Start</button>
-        <button id="reset" onclick="refreshCards()">Refresh</button>
+    <form name="form_main">
+        <button type="button" name="start">start</button>
+        <button type="button" name="refresh">refresh</button>
+    </form>
     
-</div>
-</div>
-<div id="moves">Moves:
-    <div id="move-counter">
-        0
     </div>
+
+<div class="score">Score:
+    <span id="score">0</span>
 </div>
     <script src="dos.js"></script>
 </body>

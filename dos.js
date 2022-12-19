@@ -1,16 +1,11 @@
 const cards = document.querySelectorAll(".card");
 
-let matchedCard = 0;
-let cardOne, cardTwo;
-let disableDeck = false;
-let score = 0;
+let matchedCard = 0; //karte koje se slazu
+let cardOne, cardTwo; //prva i druga kartica
+let disableDeck = false; //onemoguci spil
+let score = 0; //bodovi
 
-let playmusic;
-let pusti = true;
-let stani = false;
-//timer
-
-"use strict";
+//"use strict";
 let minute = 0;
 let second = 0;
 let millisecond = 0;
@@ -88,7 +83,8 @@ function matchCards(img1, img2){
           disableDeck=true;
             setTimeout(()=> {
             return shuffleCard();
-            }, 1500);
+            
+            }, 4500);
             reset();
         }
         cardOne.removeEventListener("click", flipCard);
@@ -143,7 +139,7 @@ function refresh(){
     
 }
 //pusta muziku
-function addSound(playmusic){
+function addSound(){
   moj = new Audio('muzikica.mp3'); 
   if (typeof moj.loop == 'boolean')
   {
@@ -177,4 +173,5 @@ disableDeck = true;
 
 
 
-
+//prevod varijabli za one koji ne znaju engleski (-S.B.)
+//

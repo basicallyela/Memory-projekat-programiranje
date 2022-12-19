@@ -5,11 +5,12 @@ let cardOne, cardTwo;
 let disableDeck = false;
 let score = 0;
 
+let playmusic;
+let pusti = true;
+let stani = false;
 //timer
 
 "use strict";
-
-let hour = 0;
 let minute = 0;
 let second = 0;
 let millisecond = 0;
@@ -19,12 +20,13 @@ let cron;
 document.form_main.start.onclick = () => startGame();
 document.form_main.refresh.onclick = () => refresh();
 
+//starta tajmer
 function start() {
   clearInterval(cron);
   cron = setInterval(() => { timer(); }, 10);
 }
 
-
+//reseta sve vrijednosti na 00
 function reset() {
   clearInterval(cron);
   minute = 0;
@@ -35,6 +37,8 @@ function reset() {
   document.getElementById('millisecond').innerText = '000';
 }
 
+
+//broji vrijeme tako sto prvo broji milisekunde, a zatim ispisuje sekunde i minute
 function timer() {
   if ((millisecond += 10) == 1000) {
     millisecond = 0;
@@ -48,13 +52,13 @@ function timer() {
   document.getElementById('second').innerText = returnData(second);
 }
 
+//kad su sekunde u jedinicama da pise npr 01 umjesto samo 1
 function returnData(input) {
   return input >= 10 ? input : `0${input}`
 }
 
 
-//exit timer
-
+//okrece kartice 
 function flipCard(e){
     let clickedCard = e.target;
     if(clickedCard !== cardOne && !disableDeck){
@@ -67,20 +71,23 @@ function flipCard(e){
        let cardOneImg = cardOne.querySelector("img").src,
        cardTwoImg = cardTwo.querySelector("img").src;
        matchCards(cardOneImg, cardTwoImg);
-    } 
-    
-    
-    
+    }   
 }
+
+//uporedjuje da li su prva kartica i druga kartica jednake
+//ako jesu povecava score
+//ako nisu trese ih i okrece
+//ako su sve matchane onda se deck gasi i igra se restartuje
 function matchCards(img1, img2){
     if(img1 === img2){
         matchedCard++;
         score+=10;
         document.getElementById('score').innerText = returnData(score);
         if(matchedCard==8){
+          moj.pause();
+          disableDeck=true;
             setTimeout(()=> {
             return shuffleCard();
-                
             }, 1500);
             reset();
         }
@@ -99,8 +106,9 @@ function matchCards(img1, img2){
         cardOne = cardTwo = "";
         disableDeck = false;
     }, 1000);
-    
 }
+
+//mijesa kartice tako sto im dodjeljuje broj u nizu i koristeci random() ih postavlja na pozicije
 function shuffleCard(){
     score = 0;
     document.getElementById('score').innerText = returnData(score);
@@ -118,15 +126,43 @@ function shuffleCard(){
 
 
 
-
+//ponovno mijesa kartice, reseta vrijeme i score, zahtijeva ponovno pritiskanje starta
 function refresh(){
-    score = 0;
-    document.getElementById('moves').innerText = returnData(moves);
+  moj.pause();
+  cards.forEach(card => {
+    card.addEventListener("click", flipCard);
+    });
+    disableDeck = true;
     shuffleCard();
     reset();
+    score = 0;
+    
+    document.getElementById('score').innerText = returnData(score);
+    
+    
+    
+}
+//pusta muziku
+function addSound(playmusic){
+  moj = new Audio('muzikica.mp3'); 
+  if (typeof moj.loop == 'boolean')
+  {
+      moj.loop = true;
+  }
+  else
+  {
+      moj.addEventListener('ended', function() {
+          this.currentTime = 0;
+          this.play();
+      }, false);
+  }
+  moj.play();
 }
 
+
+//zapocinje igru, okrece karte i mijesa ih
 function startGame(){
+    addSound();
     shuffleCard();
     disableDeck = false;
     cards.forEach(card => {
@@ -136,7 +172,7 @@ function startGame(){
     start();
 }
 
-//start game
+//start igrice, ne moze se nista prije nego sto se start klikne
 disableDeck = true;
 
 
